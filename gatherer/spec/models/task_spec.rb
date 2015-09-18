@@ -22,6 +22,7 @@ RSpec.describe Task do
       expect(task.points_toward_velocity).to eq(0)
     end
 
+    # TODO テストとしては不十分な気がする。個人的には限界境界試験をやるべきかと
     it "counts a recently completed task toward velocity" do
       task.mark_completed(1.day.ago)
       expect(task).to be_part_of_velocity
