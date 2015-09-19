@@ -22,7 +22,18 @@ RSpec.describe Task do
       expect(task.points_toward_velocity).to eq(0)
     end
 
-    # TODO テストとしては不十分な気がする。個人的には限界境界試験をやるべきかと
+    it "counts a 2 weeks and 6 days ago completed task toward velocity" do
+      task.mark_completed(3.week.ago + 1.day)  # 3週間前 + 1日 = 2週間と6日前
+      expect(task).to be_part_of_velocity
+      expect(task.points_toward_velocity).to eq(3)
+    end
+
+    it "counts a 3 weeks ago completed task toward velocity" do
+      task.mark_completed(3.week.ago)  # 3週間前
+      expect(task).not_to be_part_of_velocity
+      expect(task.points_toward_velocity).to eq(0)
+    end
+
     it "counts a recently completed task toward velocity" do
       task.mark_completed(1.day.ago)
       expect(task).to be_part_of_velocity
