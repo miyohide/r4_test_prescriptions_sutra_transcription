@@ -54,7 +54,7 @@ RSpec.describe Project do
     end
 
     it "knows its velocity" do
-      expect(project.comleted_velocity).to eq(3)
+      expect(project.completed_velocity).to eq(3)
     end
 
     it "knows its rate" do
