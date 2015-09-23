@@ -34,6 +34,7 @@ class Project
 
   # オンスケであればtrue、遅延しているならfalseを返す
   def on_schedule?
+    return false if projected_days_remaining.nan?
     (Date.today + projected_days_remaining) <= due_date
   end
 end
