@@ -24,7 +24,7 @@ class Project
 
   # 3週間前に完了したタスクのvelocityの1日あたりの値を算出する
   def current_rate
-    completed_velocity * 1.0 / 21
+    completed_velocity * 1.0 / Project.velocity_length_in_days
   end
 
   # 残りのタスクのサイズとcurrent_rateから残りの日付を算出する
@@ -36,5 +36,9 @@ class Project
   def on_schedule?
     return false if projected_days_remaining.nan?
     (Date.today + projected_days_remaining) <= due_date
+  end
+
+  def self.velocity_length_in_days
+    21
   end
 end
