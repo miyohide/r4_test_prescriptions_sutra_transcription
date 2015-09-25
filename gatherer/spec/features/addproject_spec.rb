@@ -8,6 +8,6 @@ describe "adding projects" do
     click_on("Create Project")
     visit projects_path
     expect(page).to have_content("Project Runway")
-    expect(page).to have_content("8")
+    expect(page).to have_content("8")  # total task size is 8
   end
 end
