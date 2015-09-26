@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   end
 
   def total_size
-    tasks.sum(&:size)
+    tasks.to_a.sum(&:size)
   end
 
   def remaining_size
@@ -16,7 +16,7 @@ class Project < ActiveRecord::Base
 
   # 3週間前に完了したタスクのvelocityの合計を算出する
   def completed_velocity
-    tasks.sum(&:points_toward_velocity)
+    tasks.to_a.sum(&:points_toward_velocity)
   end
 
   # 3週間前に完了したタスクのvelocityの1日あたりの値を算出する
