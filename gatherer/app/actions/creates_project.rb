@@ -12,6 +12,8 @@ class CreatesProject
     project
   end
 
+  # 文字列を\nで分割してTaskの配列として返す
+  # @return [Array] @task_string を\nで分割して生成したTaskの配列
   def convert_string_to_tasks
     task_string.split("\n").map do |task_string|
       title, size = task_string.split(":")
