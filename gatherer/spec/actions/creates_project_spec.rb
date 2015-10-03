@@ -8,6 +8,9 @@ describe CreatesProject do
   end
 
   describe "task string parsing" do
+    # task_stringは各テストの前にletで指定してテストの柔軟性を確保する
+    # letは必要が無い限り呼び出されないため、宣言部分では生成されていない。
+    # このため、task_stringをテスト直前に設定することが可能となる。
     let(:creator) { CreatesProject.new(name: "Test", task_string: task_string) }
     let(:tasks) { creator.convert_string_to_tasks }
 
@@ -28,6 +31,12 @@ describe CreatesProject do
       specify { expect(tasks.size).to eq(2) }
       specify { expect(tasks.map(&:title)).to eq(["Start things", "End things"]) }
       specify { expect(tasks.map(&:size)).to eq([3, 2]) }
+      it "handles multiple tasks" do
+        expect(tasks).to match([
+          an_object_having_attributes(title: "Start things", size: 3),
+          an_object_having_attributes(title: "End things", size: 2)
+          ])
+      end
     end
 
     describe "attaches tasks to the project" do
