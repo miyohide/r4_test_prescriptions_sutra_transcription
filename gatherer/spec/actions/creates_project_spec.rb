@@ -8,33 +8,35 @@ describe CreatesProject do
   end
 
   describe "task string parsing" do
-    it "handles an empty string" do
-      creator = CreatesProject.new(name: "Test", task_string: "")
-      tasks = creator.convert_string_to_tasks
-      expect(tasks.size).to eq(0)
+    let(:creator) { CreatesProject.new(name: "Test", task_string: task_string) }
+    let(:tasks) { creator.convert_string_to_tasks }
+
+    describe "with an empty string" do
+      let(:task_string) { "" }
+      specify { expect(tasks.size).to eq(0) }
     end
 
-    it "handles a single string" do
-      creator = CreatesProject.new(name: "Test", task_string: "Start things:3")
-      tasks = creator.convert_string_to_tasks
-      expect(tasks.size).to eq(1)
-      expect(tasks.map(&:title)).to eq(["Start things"])
-      expect(tasks.map(&:size)).to eq([3])
+    describe "with a single string" do
+      let(:task_string) { "Start things" }
+      specify { expect(tasks.size).to eq(1) }
+      specify {expect(tasks.map(&:title)).to eq(["Start things"]) }
+      specify {expect(tasks.map(&:size)).to eq([1]) }
     end
 
-    it "handles multiple tasks" do
-      creator = CreatesProject.new(name: "Test", task_string: "Start things:3\nEnd things:2")
-      tasks = creator.convert_string_to_tasks
-      expect(tasks.size).to eq(2)
-      expect(tasks.map(&:title)).to eq(["Start things", "End things"])
-      expect(tasks.map(&:size)).to eq([3, 2])
+    describe "with multiple tasks" do
+      let(:task_string) { "Start things:3\nEnd things:2"}
+      specify { expect(tasks.size).to eq(2) }
+      specify { expect(tasks.map(&:title)).to eq(["Start things", "End things"]) }
+      specify { expect(tasks.map(&:size)).to eq([3, 2]) }
     end
 
-    it "attaches tasks to the project" do
-      creator = CreatesProject.new(name: "Test", task_string: "Start things:3\nEnd things:2")
-      creator.create
-      expect(creator.project.tasks.size).to eq(2)
-      expect(creator.project).not_to be_a_new_record
+    describe "attaches tasks to the project" do
+      let(:task_string) { "Start things:3\nEnd things:2" }
+      it "saves the project and tasks" do
+        creator.create
+        expect(creator.project.tasks.size).to eq(2)
+        expect(creator.project).not_to be_a_new_record
+      end
     end
   end
 end
