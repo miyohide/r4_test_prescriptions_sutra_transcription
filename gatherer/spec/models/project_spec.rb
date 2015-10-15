@@ -33,7 +33,7 @@ RSpec.describe Project do
 
     it "can calculate total size" do
       # doneのものとsmall_not_doneのものとlarge_not_doneのもので7
-      expect(project.total_size).to eq(7)
+      expect(project).to be_of_size(7)
     end
 
     it "can calculate remaining size" do
