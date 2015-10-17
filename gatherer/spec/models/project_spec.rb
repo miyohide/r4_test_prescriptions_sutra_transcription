@@ -38,7 +38,7 @@ RSpec.describe Project do
 
     it "can calculate remaining size" do
       # small_not_doneのものとlarge_not_doneのものを合わせて5
-      expect(project.remaining_size).to eq(5)
+      expect(project).to be_of_size(5).for_incomplete_tasks_only
     end
   end
 
