@@ -8,7 +8,7 @@ FactoryGirl.define do
     # #<FactoryGirl::Declaration::Implicit:0x007f84f3a1cc58> (NoMethodError)
     # と出た。（rails console実行時 ）
     # なお、slugというカラムはないため、buildした時点で落ちる
-    slug "#{name.downcase.gsub(" ", "_")}"
+    # slug "#{name.downcase.gsub(" ", "_")}"
   end
 
   factory :big_project, class: Project do
