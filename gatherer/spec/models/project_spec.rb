@@ -85,4 +85,10 @@ RSpec.describe Project do
     allow(project).to receive(:name)
     expect(project.name).to be_nil
   end
+
+  it "stubs an object again" do
+    project = Project.new(name: "Project Greenlight")
+    allow(project).to receive(:name).and_return("Fred")
+    expect(project.name).to eq("Fred")
+  end
 end
