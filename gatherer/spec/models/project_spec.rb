@@ -91,4 +91,12 @@ RSpec.describe Project do
     allow(project).to receive(:name).and_return("Fred")
     expect(project.name).to eq("Fred")
   end
+
+  it "stubs the class" do
+    allow(Project).to receive(:find).and_return(
+      Project.new(name: "Project Greenlight")
+    )
+    project = Project.find(1)
+    expect(project.name).to eq("Project Greenlight")
+  end
 end
