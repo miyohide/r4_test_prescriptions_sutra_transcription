@@ -99,4 +99,12 @@ RSpec.describe Project do
     project = Project.find(1)
     expect(project.name).to eq("Project Greenlight")
   end
+
+  it "mocks an object" do
+    mock_project = Project.new(name: "Project Greenlight")
+    # mockはどのメソッドが呼ばれるかもチェックする
+    expect(mock_project).to receive(:name).and_return("Fred")
+    # 上で設定したnameの呼び出しを行っているため、mockのテストも通る
+    expect(mock_project.name).to eq("Fred")
+  end
 end
