@@ -15,4 +15,20 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
+  it "fails create gracefully" do
+    action_stub = double(create: false, project: Project.new)
+    # CreatesProjectはapp/actions/creates_project.rbにて定義
+    # createメソッド内でProjectも作るので、projectにも対応できるようにしている
+    expect(CreatesProject).to receive(:new).and_return(action_stub)
+    post :create, project: {name: "Project Runway"}
+    expect(response).to render_template(:new)
+  end
+
+  it "fails update gracefully" do
+    sample = Project.create!(name: "Test Project")
+    expect(sample).to receive(:update_attributes).and_return(false)
+    allow(Project).to receive(:find).and_return(sample)
+    patch :update, id: sample.id, project: {name: "Fred"}
+    expect(response).to render_template(:edit)
+  end
 end
