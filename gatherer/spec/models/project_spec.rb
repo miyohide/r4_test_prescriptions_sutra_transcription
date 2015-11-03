@@ -107,4 +107,12 @@ RSpec.describe Project do
     # 上で設定したnameの呼び出しを行っているため、mockのテストも通る
     expect(mock_project.name).to eq("Fred")
   end
+
+  it "stubs with multiple returns" do
+    project = Project.new
+    allow(project).to receive(:user_count).and_return(1, 2)
+    assert_equal(1, project.user_count)
+    assert_equal(2, project.user_count)
+    assert_equal(2, project.user_count)
+  end
 end
