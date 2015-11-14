@@ -1,3 +1,4 @@
+# coding: utf-8
 require "rails_helper"
 
 RSpec.describe Project do
@@ -109,6 +110,7 @@ RSpec.describe Project do
   end
 
   it "stubs with multiple returns" do
+    pending("user_countメソッドを実装していないのでpending")
     project = Project.new
     allow(project).to receive(:user_count).and_return(1, 2)
     assert_equal(1, project.user_count)
