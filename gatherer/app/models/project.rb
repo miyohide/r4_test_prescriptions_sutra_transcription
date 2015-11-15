@@ -34,6 +34,7 @@ class Project < ActiveRecord::Base
   # オンスケであればtrue、遅延しているならfalseを返す
   def on_schedule?
     return false if projected_days_remaining.nan?
+    return false unless projected_days_remaining.finite?
     (Date.today + projected_days_remaining) <= due_date
   end
 
