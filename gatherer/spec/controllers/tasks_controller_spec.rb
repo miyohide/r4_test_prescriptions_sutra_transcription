@@ -13,4 +13,15 @@ RSpec.describe TasksController, type: :controller do
     end
   end
 
+  it "sends email when task is completed" do
+    patch :update, id: task.id, task: { size: 3, completed: true }
+    task.reload
+    expect(task.competed_at).to be_present
+    expect(ActionMailer::Base.deliveries.size).to eq(1)
+    email = ActionMailer::Base.deliveries.first
+    expect(email.subject).to eq("A task has been completed")
+    expect(email.to).to eq(["monitor@tasks.com"])
+    expect(email.body.to_s).to match(/Write section on testing mailers/)
+  end
+
 end
