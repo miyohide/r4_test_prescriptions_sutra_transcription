@@ -27,4 +27,10 @@ class TaskTest < ActiveSupport::TestCase
     assert(task.part_of_velocity?)
     assert_equal(3, task.points_toward_velocity)
   end
+
+  test "let's stub an object" do
+    project = Project.new(name: "Project Greenlight")
+    project.stubs(:name)
+    assert_nil(project.name)
+  end
 end
