@@ -1,0 +1,9 @@
+require "test_helper"
+
+class ProjectTest < ActiveSupport::TestCase
+  test "let's stub an object" do
+    project = Project.new(name: "Project Greenlight")
+    project.stubs(:name) # ここでstubを設定しているので、上で設定したnameは取得できない
+    assert_nil(project.name)
+  end
+end
