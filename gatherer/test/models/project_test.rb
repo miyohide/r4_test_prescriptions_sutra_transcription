@@ -12,4 +12,10 @@ class ProjectTest < ActiveSupport::TestCase
     project.stubs(:name).returns("Fred")
     assert_equal("Fred", project.name)
   end
+
+  test "let's stub a class" do
+    Project.stubs(:find).returns(Project.new(name: "Project Greenlight"))
+    project = Project.find(1)
+    assert_equal("Project Greenlight", project.name)
+  end
 end
