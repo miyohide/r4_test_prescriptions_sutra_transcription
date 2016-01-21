@@ -24,4 +24,12 @@ class ProjectTest < ActiveSupport::TestCase
     mock_project.expects(:name).returns("Fred")
     assert_equal("Fred", mock_project.name)
   end
+
+  test "stub with multiple returns" do
+    stubby = Project.new
+    stubby.stubs(:user_count).returns(1, 2)
+    assert_equal(1, stubby.user_count)
+    assert_equal(2, stubby.user_count)
+    assert_equal(2, stubby.user_count)
+  end
 end
