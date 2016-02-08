@@ -7,6 +7,10 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def show
+    @project = Project.find(params[:id])
+  end
+
   def create
     @action = CreatesProject.new(
       name: params[:project][:name],
