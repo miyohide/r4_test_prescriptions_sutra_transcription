@@ -19,7 +19,7 @@
 
 <h3>New Task</h3>
 
-<%= form_for Task.new(project_id: @project.di) do |f| %>
+<%= form_for Task.new(project_id: @project.id) do |f| %>
   <%= f.hidden_field :project_id %>
   <%= f.label :title, "Task" %>
   <%= f.text_field :title %>
