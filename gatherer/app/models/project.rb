@@ -41,4 +41,9 @@ class Project < ActiveRecord::Base
   def self.velocity_length_in_days
     21
   end
+
+  def next_task_order
+    return 1 if tasks.empty?
+    (tasks.last.project_order || tasks.size) + 1
+  end
 end
