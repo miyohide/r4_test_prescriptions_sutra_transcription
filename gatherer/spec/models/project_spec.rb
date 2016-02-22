@@ -117,4 +117,17 @@ RSpec.describe Project do
     assert_equal(2, project.user_count)
     assert_equal(2, project.user_count)
   end
+
+  describe "task order" do
+    let(:project) { Project.create(name: "Project") }
+
+    it "gives me the order of the first task in an empty project" do
+      expect(project.next_task_order).to eq(1)
+    end
+
+    it "gives me the order of the next task in a project" do
+      project.tasks.create(project_order: 3)
+      expect(project.next_task_order).to eq(4)
+    end
+  end
 end
