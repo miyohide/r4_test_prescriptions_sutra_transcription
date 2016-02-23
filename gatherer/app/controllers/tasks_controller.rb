@@ -16,9 +16,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(
-      params[:task].permit(:project_id, :title, :size)
-    )
-    redirect_to @task.project
+    @project = Project.find(params[:task][:project_id])
+    @project.tasks.create(title: params[:task][:title],
+      size: params[:task][:size],
+      project_order: @project.next_task_order)
+    redirect_to @project
   end
 end
