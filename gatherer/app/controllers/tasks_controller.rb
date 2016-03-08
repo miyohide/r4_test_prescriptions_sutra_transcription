@@ -22,4 +22,16 @@ class TasksController < ApplicationController
       project_order: @project.next_task_order)
     redirect_to @project
   end
+
+  def up
+    @task = Task.find(params[:id])
+    @task.move_up
+    redirect_to @task.project
+  end
+
+  def down
+    @task = Task.find(params[:id])
+    @task.move_down
+    redirect_to @task.project
+  end
 end
