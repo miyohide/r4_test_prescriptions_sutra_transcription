@@ -57,19 +57,20 @@ RSpec.describe Task do
       expect(third).not_to be_first_in_project
       expect(third).to be_last_in_project
     end
+
+    it "can move up" do
+      expect(second.previous_task).to eq(first)
+      second.move_up
+      expect(first.reload.project_order).to eq(2)
+      expect(second.reload.project_order).to eq(1)
+    end
+
+    it "can move down" do
+      expect(second.next_task).to eq(third)
+      second.move_down
+      expect(third.reload.project_order).to eq(2)
+      expect(second.reload.project_order).to eq(3)
+    end
   end
 
-  it "can move up" do
-    expect(second.previous_task).to eq(first)
-    second.move_up
-    expect(first.reload.project_order).to eq(2)
-    expect(second.reload.project_order).to eq(1)
-  end
-
-  it "can move down" do
-    expect(second.next_task).to eq(third)
-    second.move_down
-    expect(third.reload.project_order).to eq(2)
-    expect(second.reload.project_order).to eq(3)
-  end
 end
