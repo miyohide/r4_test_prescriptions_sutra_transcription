@@ -7,14 +7,14 @@
     <tr>Size</tr>
   </thead>
   <tbody>
-    <%= @project.tasks.each do |task| %>
+    <% @project.tasks.each do |task| %>
     <tr id="task_<%= task.project_order %>">
       <td class="name"><%= task.title %></td>
       <td class="size"><%= task.size %></td>
       <td class="completed"><%= task.completed_at.to_s %></td>
       <td>
         <% unless task.first_in_project? %>
-          <%= link_to "Up", up_task_path(task.id), method: :path %>
+          <%= link_to "Up", up_task_path(task.id), method: :patch %>
         <% end %>
         <% unless task.last_in_project? %>
           <%= link_to "Down", down_task_path(task.id), method: :patch %>
