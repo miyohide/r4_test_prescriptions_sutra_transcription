@@ -10,3 +10,7 @@ class ActiveSupport::TestCase
     assert_select(doc_root, *selectors, &block)
   end
 end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
