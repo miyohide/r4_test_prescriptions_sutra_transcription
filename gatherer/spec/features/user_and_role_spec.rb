@@ -8,7 +8,7 @@ describe "with users and roles" do
     click_button("Log in")
   end
 
-  let(:user) { User.crate(email: "test@example.com", password: "password") }
+  let(:user) { User.create(email: "test@example.com", password: "password") }
 
   it "allows a logged-in user to view the project index page" do
     log_in_as(user)
