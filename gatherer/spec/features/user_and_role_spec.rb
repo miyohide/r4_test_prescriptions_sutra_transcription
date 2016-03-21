@@ -15,4 +15,9 @@ describe "with users and roles" do
     visit(projects_path)
     expect(current_path).to eq(projects_path)
   end
+
+  it "does not allow user to see the project page if not logged in" do
+    visit(projects_path)
+    expect(current_path).to eq(new_user_session_path)
+  end
 end
