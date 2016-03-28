@@ -1,6 +1,8 @@
 class Project < ActiveRecord::Base
 
   has_many :tasks, -> { order "project_order ASC" }
+  has_many :roles
+  has_many :users, through: :roles
 
   validates :name, presence: true
 
