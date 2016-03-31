@@ -45,4 +45,20 @@ RSpec.describe ProjectsController, type: :controller do
     expect(response).to redirect_to(projects_path)
     expect(assigns(:action)).not_to be_nil
   end
+
+  describe "GET show" do
+    let(:project) { Project.create(name: "Project Runway")}
+
+    it "allows a user who is part of the project to see the project" do
+      controller.current_user.stubs(can_view?: true)
+      get :show, id: project.id
+      expect(response).to render_template(:show)
+    end
+
+    it "does not allow a user who is not part of the project to see the project" do
+      controller.current_user.stubs(can_view?: false)
+      get :show, id: project.id
+      expect(response).to redirect_to(new_user_session_path)
+    end
+  end
 end
