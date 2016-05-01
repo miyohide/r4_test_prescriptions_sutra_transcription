@@ -7,8 +7,7 @@ class User < ActiveRecord::Base
   has_many :projects, through: :roles
 
   def can_view?(project)
-    return true if admin? || project.public?
-    projects.to_a.include?(project)
+    visible_projects.include?(project)
   end
 
   def visible_projects
