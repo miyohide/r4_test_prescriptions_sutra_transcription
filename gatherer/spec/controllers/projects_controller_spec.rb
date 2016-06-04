@@ -61,4 +61,15 @@ RSpec.describe ProjectsController, type: :controller do
       expect(response).to redirect_to(new_user_session_path)
     end
   end
+
+  describe "GET index" do
+    it "displays all projects correctly" do
+      user = User.new
+      project = Project.new(name: "Project Greenlight")
+      controller.expects(:current_user).returns(user)
+      user.expects(:visible_projects).returns([project])
+      get :index
+      assert_equal assigns[:projects].map(&:__getobj__), [project]
+    end
+  end
 end
