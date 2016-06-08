@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
 
   def visible_projects
     return Project.all.to_a if admin?
-    (projects.to_a + Project.where(public: true).to_a).uniq.sort_by(&:id)
+    (projects.to_a + Project.all_public).uniq.sort_by(&:id)
   end
 end
