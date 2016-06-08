@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-    @projects = Project.all
+    @projects = ProjectPresenter.from_project_list(current_user.visible_projects)
   end
 
   def new
