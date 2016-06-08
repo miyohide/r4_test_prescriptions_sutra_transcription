@@ -66,8 +66,9 @@ RSpec.describe ProjectsController, type: :controller do
     it "displays all projects correctly" do
       user = User.new
       project = Project.new(name: "Project Greenlight")
-      controller.expects(:current_user).returns(user)
-      user.expects(:visible_projects).returns([project])
+      allow(controller).to receive(:current_user) { user }
+      allow(user).to receive(:visible_projects) { [project] }
+
       get :index
       assert_equal assigns[:projects].map(&:__getobj__), [project]
     end
