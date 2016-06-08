@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe TasksController, type: :controller do
+  let(:user) { User.create!(email: "rspec@example.com", password: "password") }
   before(:example) do
+    sign_in(user)
     ActionMailer::Base.deliveries.clear
   end
 
@@ -13,7 +15,7 @@ RSpec.describe TasksController, type: :controller do
     end
 
     it "sends email when task is completed" do
-      patch :update, id: task.id, task: { size: 3, completed: true }
+      patch :update, id: task.id, task: { size: 4, completed: true }
       task.reload
       expect(task.completed_at).to be_present
       expect(ActionMailer::Base.deliveries.size).to eq(1)
