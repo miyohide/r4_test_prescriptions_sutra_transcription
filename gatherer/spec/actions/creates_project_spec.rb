@@ -7,6 +7,13 @@ describe CreatesProject do
     expect(creator.project.name).to eq("Project Runway")
   end
 
+  it "adds users to the project" do
+    user = User.new
+    creator = CreatesProject.new(name: "Project Runway", users: [user])
+    creator.build
+    expect(creator.project.users).to eq([user])
+  end
+
   describe "task string parsing" do
     # task_stringは各テストの前にletで指定してテストの柔軟性を確保する
     # letは必要が無い限り呼び出されないため、宣言部分では生成されていない。
