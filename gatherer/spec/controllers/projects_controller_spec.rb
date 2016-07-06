@@ -46,6 +46,12 @@ RSpec.describe ProjectsController, type: :controller do
     expect(assigns(:action)).not_to be_nil
   end
 
+  it "does not allow user to make a project public if it is not theirs" do
+    sample = Project.create!(name: "Test Project", public: false)
+    patch :update, id: sample.id, project: {public: true}
+    expect(sample.reload.public).to be_falsy
+  end
+
   describe "GET show" do
     let(:project) { Project.create(name: "Project Runway")}
 
