@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :roles
   has_many :projects, through: :roles
+  has_many :tasks
 
   def can_view?(project)
     visible_projects.include?(project)
