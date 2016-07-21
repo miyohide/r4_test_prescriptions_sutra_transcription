@@ -33,6 +33,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem "twitter"
 
 group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -54,4 +55,6 @@ group :test do
   gem "capybara"
   gem "minitest-rails-capybara"
   gem "rack-test"
+  gem "vcr"
+  gem "webmock"
 end
